@@ -2,6 +2,12 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Task
 from .forms import TaskForm
 
+def complete_task(request, task_id):
+    task = get_object_or_404(Task, id=task_id)
+    task.status = 'done'
+    task.save()
+    return redirect('task_list')
+
 def edit_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
     if request.method == 'POST':

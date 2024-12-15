@@ -16,4 +16,7 @@ class Task(models.Model):
     def __str__(self):
         return self.title
 
+    def is_completed(self):
+        return self.status == 'Done'
+
 # Create your models here.
