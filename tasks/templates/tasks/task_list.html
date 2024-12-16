@@ -16,7 +16,7 @@
         <tbody>
             {% for task in tasks %}
                 <!-- Если задача завершена, делаем её бледной -->
-                <tr class="{% if task.status == 'done' %}text-muted{% endif %}">
+                <tr class="{% if task.status == 'done' %}text-muted{% endif %}" data-toggle="tooltip" title="{{ task.description }}">
                     <td>{{ forloop.counter }}</td>
                     <td>{{ task.title }}</td>
                     <td>{{ task.get_status_display }}</td>
