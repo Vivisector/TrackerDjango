@@ -12,6 +12,7 @@ class Task(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default='todo')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    progress = models.IntegerField(default=0)  # Новое поле
 
     def __str__(self):
         return self.title
