@@ -5,20 +5,20 @@
 ##Установка проекта Django
 Для запуска проекта следуйте этим шагам:
 1.	Клонируйте репозиторий:
-git clone https://github.com/Vivisector/TrackerDjango.git
+`git clone https://github.com/Vivisector/TrackerDjango.git`
 2.	Перейдите в папку с проектом:
 cd Diplom
 3.	Создайте виртуальное окружение (если не использовалось ранее):
-python -m venv venv
-venv\Scripts\activate
+`python -m venv venv`
+`venv\Scripts\activate`
 4.	Установите зависимости:
-pip install -r requirements.txt
+`pip install -r requirements.txt`
 Использование проекта
 Для запуска различных частей проекта, выполните следующие команды:
 Django
 ### Для запуска проекта на Django:
-python manage.py runserver
-Приложение будет доступно по адресу http://127.0.0.1:8000/.
+`python manage.py runserver`
+Приложение будет доступно [по адресу](http://127.0.0.1:8000/).
 Основной функционал проекта
 •	Реализована модель задачи с полями: название, описание, дата создания, дата редактирования, статус, прогресс.
 •	Реализован интерфейс для просмотра, создания, редактирования и удаления задач.
