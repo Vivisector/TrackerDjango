@@ -7,10 +7,14 @@ from .models import Task
 from .forms import TaskForm
 from .views import task_list
 
+import logging
+
+logger = logging.getLogger('django')
 
 # Тесты для моделей
 class TaskModelTest(TestCase):
     def setUp(self):
+        logger.debug("Setting up test data for TaskModelTest")
         self.task = Task.objects.create(
             title="Test Task",
             description="This is a test description.",
@@ -18,6 +22,7 @@ class TaskModelTest(TestCase):
         )
 
     def test_task_creation(self):
+        logger.debug("Testing task creation")
         self.assertEqual(self.task.title, "Test Task")
         self.assertEqual(self.task.status, "in progress")
         self.assertIsInstance(self.task, Task)
