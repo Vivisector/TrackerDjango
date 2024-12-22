@@ -1,0 +1,21 @@
+from tasks.models import Task
+
+# Список задач
+tasks_data = [
+    {"title": "Закончить работу над дипломом", "description": "Разработка трекера задач", "status": "in_progress"},
+    {"title": "Купить продукты к праздникам", "description": "Торт, колбаса, печенье, пироги, торт-мороженое", "status": "todo"},
+    {"title": "Прочитать учебную книгу", "description": "Книга 'Python для чайников, которые хотят стать профессионалами'", "status": "done"},
+    {"title": "Позвонить другу Деда Мороза", "description": "Чтобы уточнить совместные планы на праздники", "status": "todo"},
+    {"title": "Записаться к врачу", "description": "Обследование у психиатра", "status": "in_progress"},
+    {"title": "Пробежка", "description": "5 км по кладбищу в ночное время", "status": "todo"},
+    {"title": "Сделать домашнее задание", "description": "По математике и физике для ребенка", "status": "in_progress"},
+    {"title": "Сдать отчет в бухгалтерию", "description": "Отчет по проекту", "status": "done"},
+    {"title": "Сделать генеральную уборку в квартире", "description": "Пропылесосить и вымыть полы", "status": "todo"},
+    {"title": "Подготовить презентацию для заказчика", "description": "Для встречи с клиентом", "status": "in_progress"},
+]
+
+# Создание задач в базе данных
+for task_data in tasks_data:
+    Task.objects.create(**task_data)
+
+print("Задачи успешно созданы!")
