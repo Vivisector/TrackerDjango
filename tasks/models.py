@@ -15,6 +15,15 @@ class Task(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     progress = models.IntegerField(default=0)  # Новое поле
 
+    def save(self, *args, **kwargs):
+        # Если прогресс больше 0, устанавливаем статус "In Progress"
+        if self.progress > 0 and self.status != 'done':
+            self.status = 'in_progress'
+        # Если прогресс равен 0, возвращаем статус "To Do"
+        elif self.progress == 0:
+            self.status = 'to_do'
+        super().save(*args, **kwargs)
+
     def __str__(self):
         return self.title
 

@@ -41,10 +41,12 @@
         <td>{{ task.created_at|date:"d.m.Y H:i" }}</td> <!-- Форматирование даты -->
         <td>{{ task.updated_at|date:"d.m.Y H:i" }}</td>
         <td>
-            <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-primary">Edit</a>
+<!--            <a href="{% url 'edit_task' task.id %}" class="btn btn-sm btn-primary">Edit</a>-->
+            <a href="{% url 'edit_task' task.id %}?page={{ page_obj.number }}" class="btn btn-sm btn-primary">Edit</a>
+
 
             <!-- Кнопка "Complete" будет бледной, если задача завершена -->
-            <a href="{% url 'complete_task' task.id %}"
+            <a href="{% url 'complete_task' task.id %}?page={{ page_obj.number }}"
                class="btn btn-sm {% if task.status == 'done' %}btn-secondary{% else %}btn-success{% endif %}">
                 {% if task.status == 'done' %}
                 Завершено
