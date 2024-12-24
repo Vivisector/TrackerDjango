@@ -18,11 +18,12 @@
 
     </thead>
     <tbody>
-    {% for task in tasks %}
+    <tbody>
+    {% for task in page_obj.object_list %}
     <!-- Если задача завершена, делаем её бледной -->
     <tr class="{% if task.status == 'done' %}text-muted{% endif %}" data-toggle="tooltip"
         title="{{ task.description }}">
-        <td>{{ forloop.counter }}</td>
+        <td>{{ forloop.counter0|add:page_obj.start_index }}</td> <!-- Нумерация с учетом пагинации -->
         <td>{{ task.title }}</td>
         <td>{{ task.get_status_display }}
             {% if task.status == 'in_progress' %}
@@ -36,6 +37,7 @@
                 </div>
             </div>
             {% endif %}
+        </td>
         <td>{{ task.created_at|date:"d.m.Y H:i" }}</td> <!-- Форматирование даты -->
         <td>{{ task.updated_at|date:"d.m.Y H:i" }}</td>
         <td>
@@ -55,5 +57,31 @@
     {% endfor %}
     </tbody>
 </table>
-<a href="{% url 'add_task' %}" class="btn btn-success">Add New Task</a>
+<!-- Блок пагинации -->
+<nav aria-label="Pagination">
+    <ul class="pagination">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+            <a class="page-link" href="?page=1">&laquo; Первая</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Назад</a>
+        </li>
+        {% endif %}
+
+        <li class="page-item disabled">
+            <span class="page-link">Страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.next_page_number }}">Вперед</a>
+        </li>
+        <li class="page-item">
+            <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">Последняя &raquo;</a>
+        </li>
+        {% endif %}
+    </ul>
+</nav>
+<a href="{% url 'add_task' %}" class="btn btn-success">Новая задача</a>
 {% endblock %}
