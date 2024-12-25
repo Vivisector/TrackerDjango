@@ -21,7 +21,7 @@ class Task(models.Model):
             self.status = 'in_progress'
         # Если прогресс равен 0, возвращаем статус "To Do"
         elif self.progress == 0:
-            self.status = 'to_do'
+            self.status = 'todo'
         super().save(*args, **kwargs)
 
     def __str__(self):
