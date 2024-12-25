@@ -7,11 +7,12 @@ from django.urls import reverse
 
 def complete_task(request, task_id):
     task = get_object_or_404(Task, id=task_id)
-    task.status = 'done'
-    task.save()
+    if task.status != 'done':  # Проверяем, что статус еще не "Done"
+        task.status = 'done'
+        task.progress = 100
+        task.save()
+    return redirect(f"{reverse('task_list')}?page={request.GET.get('page', 1)}")
 
-    # Получаем номер текущей страницы
-    current_page = request.GET.get('page', 1)  # Если параметра нет, по умолчанию 1
 
     # Перенаправляем обратно на ту же страницу
     return HttpResponseRedirect(f"{reverse('task_list')}?page={current_page}")
