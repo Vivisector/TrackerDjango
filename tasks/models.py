@@ -16,6 +16,21 @@ class Task(models.Model):
     progress = models.IntegerField(default=0)  # Новое поле
 
     def save(self, *args, **kwargs):
+        """
+               Переопределяет метод сохранения модели.
+
+               Описание:
+                   - Если значение прогресса больше 0 и статус не равен "done", устанавливается статус "in_progress".
+                   - Если прогресс равен 0, статус обновляется на "todo".
+                   - После проверки вызывает метод `save` родительского класса для сохранения изменений в базе данных.
+
+               Аргументы:
+                   *args: Позиционные аргументы, переданные в метод `save`.
+                   **kwargs: Именованные аргументы, переданные в метод `save`.
+
+               Возвращает:
+                   None
+               """
         # Если прогресс больше 0, устанавливаем статус "In Progress"
         if self.progress > 0 and self.status != 'done':
             self.status = 'in_progress'
@@ -28,6 +43,15 @@ class Task(models.Model):
         return self.title
 
     def is_completed(self):
+        """
+               Проверяет, завершена ли задача.
+
+               Описание:
+                   - Метод возвращает True, если статус задачи равен "Done".
+
+               Возвращает:
+                   bool: True, если задача завершена, иначе False.
+               """
         return self.status == 'Done'
 
 # Create your models here.
